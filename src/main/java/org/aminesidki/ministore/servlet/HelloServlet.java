@@ -1,4 +1,4 @@
-package org.aminesidki.ministore;
+package org.aminesidki.ministore.servlet;
 
 import java.io.*;
 
