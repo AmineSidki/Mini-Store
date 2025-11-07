@@ -18,6 +18,7 @@ import java.util.HashMap;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("isInvalid" , "false");
         RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
         dispatcher.forward(req,resp);
     }
@@ -39,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             if(claim.length < 2){
                 req.setAttribute("isInvalid" , "true");
                 req.setAttribute("Reason" , "Required fields not filled !");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/register.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
 
                 dispatcher.forward(req,resp);
             }else{
@@ -49,14 +50,22 @@ public class LoginServlet extends HttpServlet {
 
         User user = DaoManager.userDao.getByUsername(claimMap.get("username"));
         if(user == null){
-            System.out.println("user is null  : USERNAME :" + claimMap.get("username") + " PASSWORD :" + claimMap.get("password"));
-            return ;
-        }
-        if(BCrypt.checkpw(claimMap.get("password"),user.getPasswordHash())){
-            System.out.println("Login successful !");
+            req.setAttribute("isInvalid" , "true");
+            req.setAttribute("Reason" , "Bad credentials !");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
+
+            dispatcher.forward(req , resp);
             return;
         }
-        System.out.println("Login unsuccessful !");
+        if(BCrypt.checkpw(claimMap.get("password"),user.getPasswordHash())){
+            req.getSession(true);
+            System.out.println(req.getSession().getId());
+        }else{
+            req.setAttribute("isInvalid" , "true");
+            req.setAttribute("Reason" , "Bad credentials !");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
 
+            dispatcher.forward(req , resp);
+        }
     }
 }

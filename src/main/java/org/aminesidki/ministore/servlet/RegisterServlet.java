@@ -60,7 +60,14 @@ public class RegisterServlet extends HttpServlet {
                                     claimMap.get("email") , claimMap.get("password") ,
                                     null);
 
-        DaoManager.userDao.save(newUser);
-        resp.sendRedirect("Mini_Store_war_exploded/hello-servlet");
+        if(DaoManager.userDao.save(newUser) == null){
+            req.setAttribute("isInvalid" , "true");
+            req.setAttribute("Reason" , "Email or Username is already in use !");
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/register.jsp");
+            dispatcher.forward(req , resp);
+        }
+        req.getSession(true);
+        resp.sendRedirect("hello-servlet");
     }
 }

@@ -46,6 +46,11 @@
         <input name="password" type="password" placeholder="Password"><br>
         <input id="submit" style="color: rgb(255,255,255); font-weight: bold; border:none" type="submit" value="Sign in">
     </form>
+    <% if(request.getAttribute("isInvalid").equals("true")){ %>
+    <div id="error_block">
+        Error : ${requestScope.Reason}
+    </div>
+    <%}%>
 </div>
 </body>
 </html>

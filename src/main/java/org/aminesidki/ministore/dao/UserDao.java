@@ -126,7 +126,7 @@ public class UserDao implements Dao<User, Long>{
             return null;
 
         }catch (SQLException e){
-            throw new RuntimeException(e);
+            return null;
         }
     }
 
