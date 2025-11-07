@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebListener;
 import org.aminesidki.ministore.dao.ProductDao;
 import org.aminesidki.ministore.dao.UserDao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 @WebListener
@@ -16,15 +17,18 @@ public class StartupManager implements ServletContextListener {
         System.out.println("Web application started!");
 
         //Initialize the db connection :
-        try{
-            ConnectionManager.InitializeConnection();
-        }catch(SQLException e){
-            throw new RuntimeException("Failure to connect to db :" + e);
-        }
+        ConnectionManager.initializeConnection();
 
         //Initialize DAOs
-        DaoManager.productDao = new ProductDao(ConnectionManager.getConnection());
-        DaoManager.userDao = new UserDao(ConnectionManager.getConnection(), DaoManager.salt);
+        try {
+            Connection con = ConnectionManager.getConnection();
+
+            DaoManager.productDao = new ProductDao(con);
+            DaoManager.userDao = new UserDao(con, DaoManager.salt);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override

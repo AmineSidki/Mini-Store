@@ -10,10 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc4be885-c64d-42a0-9356-31b018360a5e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/HelloServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/servlet/HelloServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/utility/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/utility/ConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/utility/StartupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/utility/StartupManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -53,6 +56,9 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="34pr5XglttYEKZEMQFHM75Lc99C" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -73,6 +79,14 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/auth" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -189,6 +203,10 @@
       <workItem from="1761921343285" duration="23000" />
       <workItem from="1761921395171" duration="11151000" />
       <workItem from="1762029881647" duration="2212000" />
+      <workItem from="1762158648752" duration="220000" />
+      <workItem from="1762252616929" duration="7050000" />
+      <workItem from="1762426961301" duration="409000" />
+      <workItem from="1762427592671" duration="10158000" />
     </task>
     <servers />
   </component>

@@ -21,15 +21,43 @@ public class UserDao implements Dao<User, Long>{
 
             ResultSet rs = st.executeQuery();
 
-            if(rs.getFetchSize() == 0){
-                return null;
+            User user = null;
+
+            if(rs.next()){
+                System.out.println("rs is not empty !");
+                user = new User(rs.getLong(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getTimestamp(5));
             }
 
-            User user = new User(rs.getLong(1),
-                    rs.getString(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getTimestamp(5));
+            rs.close();
+            st.close();
+
+            return user;
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User getByUsername(String username){
+        try{
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM app_user WHERE username = ?");
+            st.setString(1 , username);
+
+            ResultSet rs = st.executeQuery();
+
+            User user = null;
+
+            if(rs.next()){
+                System.out.println("rs is not empty !");
+                user = new User(rs.getLong(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getTimestamp(5));
+            }
 
             rs.close();
             st.close();
@@ -69,17 +97,15 @@ public class UserDao implements Dao<User, Long>{
 
     @Override
     public User save(User object) {
-        User user = get(object.getId());
+        User user = object.getId() == null ? null : get(object.getId());
         PreparedStatement st;
         try{
             if(user == null){
                 object.setPasswordHash(BCrypt.hashpw(object.getPasswordHash() , salt));
-                st = conn.prepareStatement("INSERT INTO app_user VALUES (?,?,?,?,?)");
-                st.setLong(1,object.getId());
-                st.setString(2,object.getUsername());
-                st.setString(3,object.getEmail());
-                st.setString(4, object.getPasswordHash());
-                st.setTimestamp(5,object.getCreatedAt());
+                st = conn.prepareStatement("INSERT INTO app_user(username,email,password_hash) VALUES (?,?,?)");
+                st.setString(1,object.getUsername());
+                st.setString(2,object.getEmail());
+                st.setString(3, object.getPasswordHash());
             }else{
                 st = conn.prepareStatement("UPDATE app_user" +
                         " SET username = ?," +

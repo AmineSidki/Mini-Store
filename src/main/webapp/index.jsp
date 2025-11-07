@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <script>
+        function redirect(){
+            window.location.replace("http://localhost:8080/Mini_Store_war_exploded/login")
+        }
+    </script>
 </head>
-<body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<body onload="redirect()">
 </body>
 </html>

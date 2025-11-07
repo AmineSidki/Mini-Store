@@ -1,29 +1,36 @@
 package org.aminesidki.ministore.utility;
 
-import org.postgresql.Driver;
-
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class ConnectionManager {
-    private static Connection conn;
+    private static HikariDataSource dataSource ;
 
-    public static Connection getConnection(){
-        return conn;
+    public static Connection getConnection() throws SQLException {
+        if(dataSource == null) throw new RuntimeException("Datasource is null , call initializeConnection()");
+        return dataSource.getConnection();
     }
 
-    public static void InitializeConnection() throws  SQLException {
-        try {
+    public static void initializeConnection(){
+        try{
             Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
+        }catch(Exception e ){
             throw new RuntimeException(e);
         }
-        String dbURL = "jdbc:postgresql://localhost:5432/ministore";
-        Properties prop = new Properties();
-        prop.setProperty("user",System.getenv("DB_USR"));
-        prop.setProperty("password",System.getenv("DB_PWD"));
-        DriverManager.getConnection(dbURL , prop);
+
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/ministore");
+        config.setUsername(System.getenv("DB_USR"));
+        config.setPassword(System.getenv("DB_PWD"));
+        config.setMaximumPoolSize(10);
+        config.setMinimumIdle(2);
+        config.setIdleTimeout(30000);
+        config.setConnectionTimeout(10000);
+        config.setPoolName("MyHikariPool");
+
+        dataSource = new HikariDataSource(config);
     }
+
 }
