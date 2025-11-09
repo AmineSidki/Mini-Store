@@ -59,7 +59,6 @@ public class LoginServlet extends HttpServlet {
         }
         if(BCrypt.checkpw(claimMap.get("password"),user.getPasswordHash())){
             req.getSession(true);
-            System.out.println(req.getSession().getId());
         }else{
             req.setAttribute("isInvalid" , "true");
             req.setAttribute("Reason" , "Bad credentials !");

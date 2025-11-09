@@ -10,7 +10,7 @@ import java.util.List;
 
 @WebFilter(urlPatterns = "/*" , filterName = "sessionFilter")
 public class AuthFilter implements Filter {
-    private final ArrayList<String> excluded = new ArrayList<>(List.of("/login" , "/register" , "index.jsp" , "Mini_Store_war_exploded/"));
+    private final ArrayList<String> excluded = new ArrayList<>(List.of("/login" , "/login.jsp" , "/register" , "/index.jsp" , "Mini_Store_war_exploded/"));
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
