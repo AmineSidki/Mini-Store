@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name="logout" , value = "/logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "products" , value = "/products")
+public class ProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession(false).setAttribute("Authenticated" , "false");
-        resp.sendRedirect("login");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/products.jsp");
+        dispatcher.forward(req , resp);
     }
 }

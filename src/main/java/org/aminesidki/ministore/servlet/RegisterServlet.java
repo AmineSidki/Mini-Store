@@ -67,7 +67,7 @@ public class RegisterServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/register.jsp");
             dispatcher.forward(req , resp);
         }
-        req.getSession(true);
-        resp.sendRedirect("hello-servlet");
+        req.getSession(true).setAttribute("Authenticated" , "true");
+        resp.sendRedirect("products");
     }
 }

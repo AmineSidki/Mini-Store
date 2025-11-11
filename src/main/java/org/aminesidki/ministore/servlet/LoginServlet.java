@@ -18,6 +18,15 @@ import java.util.HashMap;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try{
+            if(req.getSession(false).getAttribute("Authenticated").equals("true")){
+                resp.sendRedirect("products");
+                return;
+            }
+        }catch(NullPointerException e){
+            req.getSession(false).setAttribute("Authenticated" , "false");
+        }
+
         req.setAttribute("isInvalid" , "false");
         RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
         dispatcher.forward(req,resp);
@@ -58,7 +67,8 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         if(BCrypt.checkpw(claimMap.get("password"),user.getPasswordHash())){
-            req.getSession(true);
+            req.getSession().setAttribute("Authenticated" , "true");
+            resp.sendRedirect("products");
         }else{
             req.setAttribute("isInvalid" , "true");
             req.setAttribute("Reason" , "Bad credentials !");

@@ -24,7 +24,6 @@ public class UserDao implements Dao<User, Long>{
             User user = null;
 
             if(rs.next()){
-                System.out.println("rs is not empty !");
                 user = new User(rs.getLong(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -51,7 +50,6 @@ public class UserDao implements Dao<User, Long>{
             User user = null;
 
             if(rs.next()){
-                System.out.println("rs is not empty !");
                 user = new User(rs.getLong(1),
                         rs.getString(2),
                         rs.getString(3),

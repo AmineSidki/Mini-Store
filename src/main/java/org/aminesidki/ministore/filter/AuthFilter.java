@@ -21,18 +21,23 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         var request = (HttpServletRequest) servletRequest;
 
-        if((request.getSession(false) != null)){
-            filterChain.doFilter(servletRequest,servletResponse);
-        }
-        else{
-            String uri = request.getRequestURI();
-            for(String s : excluded){
-                if(uri.endsWith(s)){
-                    filterChain.doFilter(servletRequest,servletResponse);
-                }
+        try{
+            if( request.getSession(false) != null && (request.getSession(false).getAttribute("Authenticated").equals("true"))){
+                filterChain.doFilter(servletRequest,servletResponse);
+                return;
             }
-            throw new RuntimeException("Unauthenticated request !");
+        }catch(Exception e){
+            System.out.println("An issue happened");
         }
+        String uri = request.getRequestURI();
+        for(String s : excluded){
+            if(uri.endsWith(s)){
+                filterChain.doFilter(servletRequest,servletResponse);
+                return;
+            }
+        }
+        throw new RuntimeException("Unauthenticated request !");
+
 
     }
 
