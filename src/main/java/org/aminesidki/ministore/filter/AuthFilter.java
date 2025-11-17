@@ -27,6 +27,7 @@ public class AuthFilter implements Filter {
                 return;
             }
         }catch(Exception e){
+            //No session -> forward to login page.
             System.out.println("An issue happened");
         }
         String uri = request.getRequestURI();

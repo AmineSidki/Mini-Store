@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
         }catch(NullPointerException e){
-            req.getSession(false).setAttribute("Authenticated" , "false");
+            req.getSession(true).setAttribute("Authenticated" , "false");
         }
 
         req.setAttribute("isInvalid" , "false");
