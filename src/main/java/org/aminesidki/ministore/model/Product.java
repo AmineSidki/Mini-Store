@@ -1,12 +1,16 @@
 package org.aminesidki.ministore.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
+@NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class Product {
      private Long id;
      private String name;
@@ -14,3 +18,4 @@ public class Product {
      private String description;
      private Timestamp createdAt;
 }
+

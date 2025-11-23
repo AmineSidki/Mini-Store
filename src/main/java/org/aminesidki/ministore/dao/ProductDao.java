@@ -2,8 +2,6 @@ package org.aminesidki.ministore.dao;
 
 import lombok.RequiredArgsConstructor;
 import org.aminesidki.ministore.model.Product;
-import org.aminesidki.ministore.model.User;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +19,9 @@ public class ProductDao implements Dao<Product,Long>{
 
             ResultSet rs = st.executeQuery();
 
-            if(rs.getFetchSize() == 0){
+            if(!rs.next()){
+                rs.close();
+                st.close();
                 return null;
             }
 
@@ -69,39 +69,33 @@ public class ProductDao implements Dao<Product,Long>{
 
     @Override
     public Product save(Product object) {
-        Product product = get(object.getId());
+        Product product = object.getId() == null ? null : get(object.getId());
         PreparedStatement st;
         try{
             if(product == null){
-                st = conn.prepareStatement("INSERT INTO product VALUES (?,?,?,?,?)");
-                st.setLong(1,object.getId());
-                st.setString(2,object.getName());
-                st.setFloat(3,object.getPrice());
-                st.setString(4, object.getDescription());
-                st.setTimestamp(5,object.getCreatedAt());
+                st = conn.prepareStatement("INSERT INTO product(name,price,description) VALUES (?,?,?)");
+                st.setString(1,object.getName());
+                st.setFloat(2,object.getPrice());
+                st.setString(3, object.getDescription());
             }else{
                 st = conn.prepareStatement("UPDATE product" +
-                        " SET username = ?," +
-                        " SET email = ?," +
-                        " SET password_hash = ?," +
-                        " SET created_at = ?" +
+                        " SET name = ?," +
+                        " SET price = ?," +
+                        " SET description = ?," +
                         "WHERE id = ?");
                 st.setString(1,object.getName());
                 st.setFloat(2,object.getPrice());
                 st.setString(3, object.getDescription());
-                st.setTimestamp(4,object.getCreatedAt());
-                st.setLong(5,object.getId());
+                st.setLong(4,object.getId());
             }
 
             if(st.executeUpdate() != 0){
-                st.close();
                 return object;
             }
-            st.close();
             return null;
 
         }catch (SQLException e){
-            throw new RuntimeException(e);
+            return null;
         }
     }
 

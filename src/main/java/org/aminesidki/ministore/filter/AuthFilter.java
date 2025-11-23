@@ -19,16 +19,19 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        var request = (HttpServletRequest) servletRequest;
 
+        var request = (HttpServletRequest) servletRequest;
         try{
-            if( request.getSession(false) != null && (request.getSession(false).getAttribute("Authenticated").equals("true"))){
+            if( request.getSession(false) != null &&
+                    request.getSession(false).getAttribute("Authenticated") != null &&
+                    (request.getSession(false).getAttribute("Authenticated").equals("true"))){
                 filterChain.doFilter(servletRequest,servletResponse);
                 return;
             }
         }catch(Exception e){
             //No session -> forward to login page.
             System.out.println("An issue happened");
+            e.printStackTrace();
         }
         String uri = request.getRequestURI();
         for(String s : excluded){
@@ -38,8 +41,6 @@ public class AuthFilter implements Filter {
             }
         }
         throw new RuntimeException("Unauthenticated request !");
-
-
     }
 
     @Override

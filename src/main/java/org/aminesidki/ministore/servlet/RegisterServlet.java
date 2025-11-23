@@ -11,6 +11,8 @@ import org.aminesidki.ministore.utility.DaoManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @WebServlet(name = "register" , value = "/register")
@@ -18,7 +20,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("isInvalid" , "false");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/register.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/auth/register.jsp");
         dispatcher.forward(req,resp);
     }
 
@@ -39,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
             if(claim.length < 2){
                 req.setAttribute("isInvalid" , "true");
                 req.setAttribute("Reason" , "Required fields not filled !");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/register.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/auth/register.jsp");
 
                 dispatcher.forward(req,resp);
             }else{
@@ -51,20 +53,20 @@ public class RegisterServlet extends HttpServlet {
                 req.setAttribute("isInvalid" , "true");
                 req.setAttribute("Reason" , "Passwords mismatch !");
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/register.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/auth/register.jsp");
                 dispatcher.forward(req,resp);
         }
 
-        User newUser = new User(null,
+        User newUser = new User(-1L,
                                     claimMap.get("username") ,
                                     claimMap.get("email") , claimMap.get("password") ,
-                                    null);
+                                    Timestamp.valueOf(LocalDateTime.MIN));
 
         if(DaoManager.userDao.save(newUser) == null){
             req.setAttribute("isInvalid" , "true");
             req.setAttribute("Reason" , "Email or Username is already in use !");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/register.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/auth/register.jsp");
             dispatcher.forward(req , resp);
         }
         req.getSession(true).setAttribute("Authenticated" , "true");

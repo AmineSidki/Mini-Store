@@ -109,20 +109,17 @@ public class UserDao implements Dao<User, Long>{
                         " SET username = ?," +
                         " SET email = ?," +
                         " SET password_hash = ?," +
-                        " SET created_at = ?" +
                         "WHERE id = ?");
                 st.setString(1,object.getUsername());
                 st.setString(2,object.getEmail());
                 st.setString(3, object.getPasswordHash());
-                st.setTimestamp(4,object.getCreatedAt());
-                st.setLong(5,object.getId());
+                st.setLong(4,object.getId());
             }
 
             if(st.executeUpdate() != 0){
                 return object;
             }
             return null;
-
         }catch (SQLException e){
             return null;
         }

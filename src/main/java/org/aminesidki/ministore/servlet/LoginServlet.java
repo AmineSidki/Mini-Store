@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         req.setAttribute("isInvalid" , "false");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/auth/login.jsp");
         dispatcher.forward(req,resp);
     }
 
@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
             if(claim.length < 2){
                 req.setAttribute("isInvalid" , "true");
                 req.setAttribute("Reason" , "Required fields not filled !");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/auth/login.jsp");
 
                 dispatcher.forward(req,resp);
             }else{
@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
         if(user == null){
             req.setAttribute("isInvalid" , "true");
             req.setAttribute("Reason" , "Bad credentials !");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/auth/login.jsp");
 
             dispatcher.forward(req , resp);
             return;
@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
         }else{
             req.setAttribute("isInvalid" , "true");
             req.setAttribute("Reason" , "Bad credentials !");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/auth/login.jsp");
 
             dispatcher.forward(req , resp);
         }
