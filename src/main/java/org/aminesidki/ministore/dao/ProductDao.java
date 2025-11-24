@@ -80,9 +80,9 @@ public class ProductDao implements Dao<Product,Long>{
             }else{
                 st = conn.prepareStatement("UPDATE product" +
                         " SET name = ?," +
-                        " SET price = ?," +
-                        " SET description = ?," +
-                        "WHERE id = ?");
+                        " price = ?," +
+                        " description = ?" +
+                        " WHERE id = ?");
                 st.setString(1,object.getName());
                 st.setFloat(2,object.getPrice());
                 st.setString(3, object.getDescription());

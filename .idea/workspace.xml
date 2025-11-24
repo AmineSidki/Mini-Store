@@ -10,18 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc4be885-c64d-42a0-9356-31b018360a5e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/list.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/dao/ProductDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/filter/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/filter/AuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/servlet/HelloServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/servlet/LoginServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/servlet/ProductsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/servlet/ProductsServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/servlet/RegisterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/aminesidki/ministore/servlet/RegisterServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/auth/products.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,23 +62,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Tomcat Server.Tomcat 11.0.13.executor": "Run",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/aminesidki/IdeaProjects/Mini-Store/pom.xml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 11.0.13.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/aminesidki/IdeaProjects/Mini-Store/pom.xml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product" />
@@ -225,6 +218,8 @@
       <workItem from="1763722988068" duration="1895000" />
       <workItem from="1763810388497" duration="3549000" />
       <workItem from="1763895629261" duration="9912000" />
+      <workItem from="1763987983009" duration="328000" />
+      <workItem from="1764018450917" duration="3262000" />
     </task>
     <servers />
   </component>

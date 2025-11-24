@@ -33,10 +33,15 @@ public class ProductsServlet extends HttpServlet {
                 returnForm(req , resp , Boolean.TRUE);
                 return;
             case "/edit":
+                var prod = DaoManager.productDao.get(Long.parseLong(req.getParameter("id")));
+                if(prod == null){
+                    resp.sendRedirect(req.getContextPath()+"/products");
+                }
+                req.setAttribute("product" , prod);
                 returnForm(req , resp , Boolean.FALSE);
                 return;
             default:
-                resp.sendRedirect(req.getContextPath()+"/products");
+                req.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(req,resp);
         }
     }
 
@@ -50,11 +55,14 @@ public class ProductsServlet extends HttpServlet {
         }
 
         switch(path){
+            case "/update":
+                updateProd(req , resp);
+                return;
             case "/delete":
                 deleteProd(req , resp);
                 return;
             default:
-                resp.sendRedirect(req.getContextPath() + "/products");
+                req.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(req,resp);
         }
     }
 
@@ -66,6 +74,20 @@ public class ProductsServlet extends HttpServlet {
                 Timestamp.valueOf(LocalDateTime.MIN));
 
         if (DaoManager.productDao.save(p) == null) {
+            resp.sendRedirect("");
+            return;
+        }
+        resp.sendRedirect(req.getContextPath()+"/products");
+    }
+
+    private void updateProd(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Product p = DaoManager.productDao.get(Long.parseLong(req.getParameter("id")));
+
+        p.setName(req.getParameter("name"));
+        p.setDescription(req.getParameter("description"));
+        p.setPrice(Float.parseFloat(req.getParameter("price")));
+
+        if(DaoManager.productDao.save(p) == null){
             resp.sendRedirect("");
             return;
         }

@@ -107,9 +107,9 @@ public class UserDao implements Dao<User, Long>{
             }else{
                 st = conn.prepareStatement("UPDATE app_user" +
                         " SET username = ?," +
-                        " SET email = ?," +
-                        " SET password_hash = ?," +
-                        "WHERE id = ?");
+                        " email = ?," +
+                        " password_hash = ?" +
+                        " WHERE id = ?");
                 st.setString(1,object.getUsername());
                 st.setString(2,object.getEmail());
                 st.setString(3, object.getPasswordHash());
