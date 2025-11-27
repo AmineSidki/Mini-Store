@@ -2,28 +2,38 @@
 FROM maven:3.9-eclipse-temurin-17-alpine AS maven
 
 WORKDIR /app
-
-# Copy pom.xml first to cache dependencies
 COPY pom.xml .
-# Download dependencies (this layer will be cached unless pom.xml changes)
 RUN mvn dependency:go-offline
 
-# Copy the source code
 COPY src ./src
-
-# Build the WAR file
 RUN mvn clean package -DskipTests
 
 # Stage 2: Runtime
 FROM tomcat:10.1-jdk17-temurin-jammy
 
-# Remove default Tomcat apps to keep it clean/secure
+# 1. Create the Hugging Face user (ID 1000)
+RUN useradd -m -u 1000 user
+
+# 2. Change Tomcat port from 8080 to 7860
+RUN sed -i 's/port="8080"/port="7860"/' /usr/local/tomcat/conf/server.xml
+
+# 3. Clear default apps
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy the built WAR from the previous stage to the root context
-# Note: Ensure your pom.xml produces only one WAR, or be specific with the name here
+# 4. Copy WAR to ROOT.war (Crucial so app runs at "/")
 COPY --from=maven /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
-EXPOSE 8080
+# 5. Grant permissions to User 1000 for Tomcat directories
+# (Tomcat needs to write to logs, temp, webapps, work)
+RUN chown -R user:user /usr/local/tomcat
+
+# 6. Switch to the user
+USER user
+
+# 7. Expose the specific port
+EXPOSE 7860
+
+ENV DB_USR="postgres.ayhgyowbjzfjcftrsswl"
+ENV DB_PWD="root"
 
 CMD ["catalina.sh", "run"]

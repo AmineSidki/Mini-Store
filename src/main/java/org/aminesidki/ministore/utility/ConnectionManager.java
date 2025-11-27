@@ -21,7 +21,7 @@ public class ConnectionManager {
         }
 
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://db:5432/ministore");
+        config.setJdbcUrl("jdbc:postgresql://aws-1-eu-west-1.pooler.supabase.com:6543/postgres");
         config.setUsername(System.getenv("DB_USR"));
         config.setPassword(System.getenv("DB_PWD"));
         config.setMaximumPoolSize(10);
